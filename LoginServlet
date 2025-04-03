@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <form action="LoginServlet" method="post">
+        <label>Username:</label> <input type="text" name="username"><br>
+        <label>Password:</label> <input type="password" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String user = request.getParameter("username");
+        String pass = request.getParameter("password");
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        if ("admin".equals(user) && "password".equals(pass)) {
+            out.println("<h2>Welcome, " + user + "!</h2>");
+        } else {
+            out.println("<h2>Invalid Credentials</h2>");
+        }
+    }
+}
